@@ -59,7 +59,7 @@ Quit
 ### Build from source
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/StudioDisplayControl.git
+git clone https://github.com/gt1996md/StudioDisplayControl.git
 cd StudioDisplayControl
 chmod +x build_app.sh
 ./build_app.sh
