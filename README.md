@@ -4,18 +4,19 @@ A lightweight macOS menu bar utility that **simultaneously controls volume and b
 
 ![App Icon](AppIcon.png)
 
-## The Problem
+## Why I Built This
 
-If you have multiple Apple Studio Displays connected to your Mac, macOS doesn't provide a way to:
+I bought two Apple Studio Displays and wanted to use both of their built-in speakers together as a stereo pair — the sound quality is actually surprisingly good when they're working in unison.
 
-- Adjust volume on all displays at once using keyboard keys when using a Multi-Output Audio Device
-- Sync brightness across all displays with a single key press
+So I went into Audio MIDI Setup, created a Multi-Output Device combining both displays, and it worked... until I tried to change the volume.
 
-You're stuck adjusting each display individually, or paying $39+ for third-party tools.
+**macOS completely disables the keyboard volume keys for Multi-Output Devices.** The volume buttons on the keyboard? Grayed out. The menu bar volume slider? Gone. The only way to adjust volume is to dig back into Audio MIDI Setup and manually drag a tiny slider for each individual device. Every. Single. Time.
 
-## The Solution
+I looked for solutions. The free tools out there didn't quite solve this specific problem. The ones that did — like SoundSource — cost $39. For a volume slider.
 
-**Studio Display Control** intercepts your keyboard's media keys and applies changes to all connected Studio Displays simultaneously.
+So I wrote this app in a single afternoon. It intercepts the keyboard media keys and directly controls all your Studio Displays at once. Volume, brightness, mute — everything stays in sync. It sits quietly in your menu bar and just works.
+
+If you're running multiple Studio Displays and this annoys you too, here you go. It's free.
 
 ## Features
 
@@ -32,7 +33,7 @@ You're stuck adjusting each display individually, or paying $39+ for third-party
 When you click the 🖥️ icon in the menu bar:
 
 ```
-Studio Display: Audio ×3  Display ×3
+Studio Display: Audio ×2  Display ×2
 ────────────────────────────────
 🔊 Volume
   Volume: 50%
@@ -104,7 +105,7 @@ The app is a single Swift file (~400 lines) with no external dependencies. It us
 - **Brightness control uses a private Apple framework** (`DisplayServices`). This could break in future macOS updates, though it has been stable for years.
 - **No native macOS OSD** — The system volume/brightness overlay won't appear since the app intercepts the keys before macOS processes them.
 - **Unsigned app** — You'll need to right-click → Open on first launch since the app isn't signed with an Apple Developer certificate.
-- **No Widget support** — macOS widgets require WidgetKit which needs a full Xcode project with Widget Extension.
+- **Apple displays only** — Currently only works with Apple Studio Display / Pro Display XDR. Non-Apple displays would require DDC/CI support (contributions welcome!).
 
 ## Uninstall
 
@@ -124,5 +125,5 @@ Pull requests welcome! Some ideas:
 - [ ] Native macOS OSD overlay when adjusting volume/brightness
 - [ ] Individual per-display volume/brightness control
 - [ ] Keyboard shortcut customization
-- [ ] Support for non-Apple external displays (via DDC)
+- [ ] Support for non-Apple external displays (via DDC/CI)
 - [ ] Sparkle auto-updater
